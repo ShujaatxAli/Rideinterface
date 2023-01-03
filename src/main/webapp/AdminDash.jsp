@@ -107,12 +107,14 @@ if (request.getParameter("Cust") != null) {
   <tbody>
     
     <% 
-    Customer custobj = new Customer();
+    
+    Customer custobj = new CustomerProxy().getCustomer();
 
-    ArrayList<String> ls  = custobj.getCustomerInfo();
+    String[] ls  = (String[])custobj.getCustomerInfo();
+    
 
     int z=0;
-    for (int i=0;i<(ls.size()/5);i++)
+    for (int i=0;i<(ls.length/5);i++)
     {
 
     %>
@@ -122,7 +124,7 @@ if (request.getParameter("Cust") != null) {
     for(int j=0; j<5; j++)
     {
     %> 	 
-         <td><% out.println(ls.get(i*5+j)); %></td>
+         <td><% out.println(ls[(i*5+j)]); %></td>
     <%
     }
 
@@ -149,12 +151,12 @@ else if (request.getParameter("Driver") != null) {
 
 <% 
 
-Driver carrrr = new Driver();
+Driver driverobj = new DriverProxy().getDriver();
 
-ArrayList<String> ls  = carrrr.getDriverInfo();
+String[] ls  = (String[])driverobj.getDriverInfo();
 
 int z=0;
-for (int i=0;i<(ls.size()/6);i++)
+for (int i=0;i<(ls.length/6);i++)
 {
 
 %>
@@ -164,7 +166,7 @@ for (int i=0;i<(ls.size()/6);i++)
 for(int j=0; j<6; j++)
 {
 %> 	 
-     <td><% out.println(ls.get(i*6+j)); %></td>
+     <td><% out.println(ls[(i*6+j)]); %></td>
 <%
 }
 
@@ -192,12 +194,12 @@ else if (request.getParameter("Veh") != null) {
 
 <%
 
-Car carrrr = new Car();
+Car carobj = new CarProxy().getCar();
 
-ArrayList<String> ls  = carrrr.getCarInfo();
+String[] ls  = (String[])carobj.getCarInfo();
 
 int z=0;
-for (int i=0;i<(ls.size()/7);i++)
+for (int i=0;i<(ls.length/7);i++)
 {
 
 %>
@@ -207,7 +209,7 @@ for (int i=0;i<(ls.size()/7);i++)
 for(int j=0; j<7; j++)
 {
 %> 	 
-     <td><% out.println(ls.get(i*7+j)); %></td>
+     <td><% out.println(ls[(i*7+j)]); %></td>
 <%
 }
 
