@@ -1,7 +1,3 @@
-<%@page import="main.CustIDProxy"%>
-<%@page import="main.CustID"%>
-<%@page import="main.CustNameProxy"%>
-<%@page import="main.CustName"%>
 <%@page import="main.RideHistoryProxy"%>
 <%@page import="main.RideHistory"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -9,23 +5,34 @@
     
 <%@page import="java.sql.*,java.util.*"%>
 
+<!-- =============== BACK END ==================== -->
           
 <%
-//================= Sessions ===========================
+
+String driverName = "com.mysql.jdbc.Driver";
+Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ridebooking", "root", "root");
+
+Connection connection = null;
+Statement statement = null;
+ResultSet resultSet = null;
 
 String Pick = request.getParameter("Pick");
 String Drop = request.getParameter("Drop");
-String Email=(String)session.getAttribute("Email");
-String Pass=(String)session.getAttribute("Pass");  
 int ID = 0;
 int Status = 0;
 
-//================== Objects ==========================
+String Email=(String)session.getAttribute("Email");
+String Pass=(String)session.getAttribute("Pass");  
 
-CustName custname = new CustNameProxy().getCustName();
-CustID custid = new CustIDProxy().getCustID();
+Class.forName("com.mysql.jdbc.Driver");
+Statement stt=conn.createStatement();
 
-ID = custid.getCustomerID(Email);
+ ResultSet rs=stt.executeQuery("select * from customer where Cust_Email = '"+Email+"'");
+ while(rs.next()){
+     ID=rs.getInt("Cust_ID");
+     }
+
+
 
   %>
 
@@ -78,8 +85,21 @@ ID = custid.getCustomerID(Email);
           <li><a class="nav-link scrollto" href="index.jsp#about">Sign up as Customer</a></li>
           <li><a class="nav-link scrollto" href="index.jsp#driver">Sign up as Captain</a></li>
           <li class="dropdown"><a href="#">
-          <span><strong><%=custname.getCustomerFullName(Email) %></strong></span>
-          <i class="bi bi-chevron-down"></i></a>
+          <span>
+          <%  
+			statement=conn.createStatement();
+			String sql ="SELECT * FROM customer where Cust_Email='"+Email+"'";
+			resultSet = statement.executeQuery(sql);
+			while(resultSet.next()){
+			%>
+			
+			<%=resultSet.getString("Cust_Fname") %>
+			<%=resultSet.getString("Cust_Lname") %>
+			
+			<%
+			}
+			%>
+          </span> <i class="bi bi-chevron-down"></i></a>
               
               <!-- Dropdown - User Information -->
              <ul>
@@ -136,10 +156,14 @@ ID = custid.getCustomerID(Email);
 			  </thead>
 			  <tbody>
 			   <%
-			    	RideHistory ridehistory = new RideHistoryProxy().getRideHistory();
+			    //  Class.forName("com.mysql.jdbc.Driver");
+			  	//  Statement st=conn.createStatement();
+			    //  ResultSet rs2=st.executeQuery("select * from booking where Customer_ID = "+ID);
+			    //  while(rs2.next()){
+			      
+			    	RideHistory RHobj = new RideHistoryProxy().getRideHistory();
 
-			    	ArrayList<String> ls  = ridehistory.getRideHistory(ID);
-			    	
+			    	ArrayList<String> ls  = RHobj.getRideHistory(ID);
 					
 					for (int i=0;i<(ls.size());i++)
 					{
@@ -167,10 +191,7 @@ ID = custid.getCustomerID(Email);
 			      </td>
 			    </tr>
 			  <%
-			      }catch(Exception e) {
-						
-						System.out.println(e);
-					}
+			      }
 			  %>
 			  </tbody>
 			</table>

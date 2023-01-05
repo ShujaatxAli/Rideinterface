@@ -7,7 +7,7 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <element name="getRideHistory">
     <complexType>
      <sequence>
-      <element name="ID" type="xsd:int"/>
+      <element name="ID" type="xsd:string"/>
      </sequence>
     </complexType>
    </element>

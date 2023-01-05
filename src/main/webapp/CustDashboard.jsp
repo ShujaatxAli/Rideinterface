@@ -1,5 +1,3 @@
-<%@page import="main.CustNameProxy"%>
-<%@page import="main.CustName"%>
 <%@page import="main.LoginDetailsProxy"%>
 <%@page import="main.LoginDetails"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -8,7 +6,13 @@
 <%@page import="java.sql.*,java.util.*"%>
 
 <%
-// ============= Sessions ====================
+String driverName = "com.mysql.jdbc.Driver";
+Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ridebooking", "root", "root");
+
+Connection connection = null;
+Statement statement = null;
+ResultSet resultSet = null;
+
 
 String Email = request.getParameter("Email");
 String Pass = request.getParameter("Pass");
@@ -22,14 +26,9 @@ Pass=(String)session.getAttribute("Pass");
 %>
 
 <%
-//================== Objects ==========================
 
 LoginDetails loginobj = new LoginDetailsProxy().getLoginDetails();
-CustName custname = new CustNameProxy().getCustName();
 
-
-
-//================== Login =============================
 
 if(loginobj.getLoginInfo(Email, Pass) == 1){
 	
@@ -108,8 +107,21 @@ else if (loginobj.getLoginInfo(Email, Pass) == 0){
           <li><a class="nav-link scrollto" href="index.jsp#about">Sign up as Customer</a></li>
           <li><a class="nav-link scrollto" href="index.jsp#driver">Sign up as Captain</a></li>
           <li class="dropdown"><a href="#">
-          <span><strong><%=custname.getCustomerFullName(Email) %></strong></span>
-          <i class="bi bi-chevron-down"></i></a>
+          <span>
+          <%  
+			statement=conn.createStatement();
+			String sql ="SELECT * FROM customer where Cust_Email='"+Email+"'";
+			resultSet = statement.executeQuery(sql);
+			while(resultSet.next()){
+			%>
+			
+			<%=resultSet.getString("Cust_Fname") %>
+			<%=resultSet.getString("Cust_Lname") %>
+			
+			<%
+			}
+			%>
+          </span> <i class="bi bi-chevron-down"></i></a>
               
               <!-- Dropdown - User Information -->
              <ul>
@@ -133,7 +145,19 @@ else if (loginobj.getLoginInfo(Email, Pass) == 0){
 
         <div class="d-flex justify-content-start align-items-center">
 			
-			<h3>Welcomer <strong><%=custname.getCustomerFullName(Email)  %></strong></h3>
+			<h3>Welcomer 
+			<%  
+			resultSet = statement.executeQuery(sql);
+			while(resultSet.next()){
+			%>
+			<strong>
+			<%=resultSet.getString("Cust_Fname") %>
+			<%=resultSet.getString("Cust_Lname") %>
+			</strong>
+			<%
+			}
+			%>
+			</h3>
 			
 		</div>
 

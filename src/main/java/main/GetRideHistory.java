@@ -8,13 +8,13 @@
 package main;
 
 public class GetRideHistory  implements java.io.Serializable {
-    private int ID;
+    private java.lang.String ID;
 
     public GetRideHistory() {
     }
 
     public GetRideHistory(
-           int ID) {
+           java.lang.String ID) {
            this.ID = ID;
     }
 
@@ -24,7 +24,7 @@ public class GetRideHistory  implements java.io.Serializable {
      * 
      * @return ID
      */
-    public int getID() {
+    public java.lang.String getID() {
         return ID;
     }
 
@@ -34,7 +34,7 @@ public class GetRideHistory  implements java.io.Serializable {
      * 
      * @param ID
      */
-    public void setID(int ID) {
+    public void setID(java.lang.String ID) {
         this.ID = ID;
     }
 
@@ -50,7 +50,9 @@ public class GetRideHistory  implements java.io.Serializable {
         __equalsCalc = obj;
         boolean _equals;
         _equals = true && 
-            this.ID == other.getID();
+            ((this.ID==null && other.getID()==null) || 
+             (this.ID!=null &&
+              this.ID.equals(other.getID())));
         __equalsCalc = null;
         return _equals;
     }
@@ -62,7 +64,9 @@ public class GetRideHistory  implements java.io.Serializable {
         }
         __hashCodeCalc = true;
         int _hashCode = 1;
-        _hashCode += getID();
+        if (getID() != null) {
+            _hashCode += getID().hashCode();
+        }
         __hashCodeCalc = false;
         return _hashCode;
     }
@@ -76,7 +80,7 @@ public class GetRideHistory  implements java.io.Serializable {
         org.apache.axis.description.ElementDesc elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("ID");
         elemField.setXmlName(new javax.xml.namespace.QName("http://main", "ID"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
     }

@@ -8,5 +8,5 @@
 package main;
 
 public interface RideHistory extends java.rmi.Remote {
-    public java.lang.Object[] getRideHistory(int ID) throws java.rmi.RemoteException;
+    public java.lang.Object[] getRideHistory(java.lang.String ID) throws java.rmi.RemoteException;
 }
