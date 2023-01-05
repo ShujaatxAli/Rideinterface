@@ -1,5 +1,11 @@
+Shujaat
+Ride History:
+	A Ride History is maintained to keep the record of Total rides. Ride History logs all of your past rides and combines rides that were taken in the same day into one charge. In the detailed view of a ride, you can see the route your driver took. including the complete driver, customer and vehicle details.
+
+Rating : 
+	A customer can give ratings to a driver aacording to his service and drive quality and overall experiece than with the help of rating drivers can be ranked out among all drivers. Where as also driver can rate customers by which company monitor customer behaviour among drivers.
+
 Ammar:
-========
 Registration:
 	If you want to get access on our application first you have to log in
 	 through your account. You can log in as a Customer or as a Driver.
