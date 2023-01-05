@@ -4,53 +4,48 @@
 Built on Apr 22, 2006 (06:55:48 PDT)-->
  <wsdl:types>
   <schema elementFormDefault="qualified" targetNamespace="http://main" xmlns="http://www.w3.org/2001/XMLSchema">
-   <element name="getRideHistory">
+   <element name="getCustomerID">
     <complexType>
      <sequence>
-      <element name="ID" type="xsd:int"/>
+      <element name="Email" type="xsd:string"/>
      </sequence>
     </complexType>
    </element>
-   <element name="getRideHistoryResponse">
+   <element name="getCustomerIDResponse">
     <complexType>
      <sequence>
-      <element name="getRideHistoryReturn" type="impl:ArrayOf_xsd_anyType"/>
+      <element name="getCustomerIDReturn" type="xsd:int"/>
      </sequence>
     </complexType>
    </element>
-   <complexType name="ArrayOf_xsd_anyType">
-    <sequence>
-     <element maxOccurs="unbounded" minOccurs="0" name="item" type="xsd:anyType"/>
-    </sequence>
-   </complexType>
   </schema>
  </wsdl:types>
 
-   <wsdl:message name="getRideHistoryRequest">
+   <wsdl:message name="getCustomerIDResponse">
 
-      <wsdl:part element="impl:getRideHistory" name="parameters">
-
-      </wsdl:part>
-
-   </wsdl:message>
-
-   <wsdl:message name="getRideHistoryResponse">
-
-      <wsdl:part element="impl:getRideHistoryResponse" name="parameters">
+      <wsdl:part element="impl:getCustomerIDResponse" name="parameters">
 
       </wsdl:part>
 
    </wsdl:message>
 
-   <wsdl:portType name="RideHistory">
+   <wsdl:message name="getCustomerIDRequest">
 
-      <wsdl:operation name="getRideHistory">
+      <wsdl:part element="impl:getCustomerID" name="parameters">
 
-         <wsdl:input message="impl:getRideHistoryRequest" name="getRideHistoryRequest">
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="CustID">
+
+      <wsdl:operation name="getCustomerID">
+
+         <wsdl:input message="impl:getCustomerIDRequest" name="getCustomerIDRequest">
 
        </wsdl:input>
 
-         <wsdl:output message="impl:getRideHistoryResponse" name="getRideHistoryResponse">
+         <wsdl:output message="impl:getCustomerIDResponse" name="getCustomerIDResponse">
 
        </wsdl:output>
 
@@ -58,21 +53,21 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:portType>
 
-   <wsdl:binding name="RideHistorySoapBinding" type="impl:RideHistory">
+   <wsdl:binding name="CustIDSoapBinding" type="impl:CustID">
 
       <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
 
-      <wsdl:operation name="getRideHistory">
+      <wsdl:operation name="getCustomerID">
 
          <wsdlsoap:operation soapAction=""/>
 
-         <wsdl:input name="getRideHistoryRequest">
+         <wsdl:input name="getCustomerIDRequest">
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-         <wsdl:output name="getRideHistoryResponse">
+         <wsdl:output name="getCustomerIDResponse">
 
             <wsdlsoap:body use="literal"/>
 
@@ -82,11 +77,11 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:binding>
 
-   <wsdl:service name="RideHistoryService">
+   <wsdl:service name="CustIDService">
 
-      <wsdl:port binding="impl:RideHistorySoapBinding" name="RideHistory">
+      <wsdl:port binding="impl:CustIDSoapBinding" name="CustID">
 
-         <wsdlsoap:address location="http://localhost:8080/RideBooking/services/RideHistory"/>
+         <wsdlsoap:address location="http://localhost:8080/RideBooking/services/CustID"/>
 
       </wsdl:port>
 

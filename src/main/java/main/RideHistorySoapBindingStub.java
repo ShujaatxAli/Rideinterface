@@ -25,7 +25,7 @@ public class RideHistorySoapBindingStub extends org.apache.axis.client.Stub impl
         org.apache.axis.description.ParameterDesc param;
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("getRideHistory");
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://main", "ID"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://main", "ID"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"), int.class, false, false);
         oper.addParameter(param);
         oper.setReturnType(new javax.xml.namespace.QName("http://main", "ArrayOf_xsd_anyType"));
         oper.setReturnClass(java.lang.Object[].class);
@@ -156,7 +156,7 @@ public class RideHistorySoapBindingStub extends org.apache.axis.client.Stub impl
         }
     }
 
-    public java.lang.Object[] getRideHistory(java.lang.String ID) throws java.rmi.RemoteException {
+    public java.lang.Object[] getRideHistory(int ID) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -172,7 +172,7 @@ public class RideHistorySoapBindingStub extends org.apache.axis.client.Stub impl
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {ID});
+ try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {new java.lang.Integer(ID)});
 
         if (_resp instanceof java.rmi.RemoteException) {
             throw (java.rmi.RemoteException)_resp;
